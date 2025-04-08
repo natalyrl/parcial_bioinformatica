@@ -19,6 +19,8 @@ wget https://raw.githubusercontent.com/paula-torres/bioinfo_ur_2025/refs/heads/m
 blastn -query query.fasta -task megablast -db misticetos -outfmt 7 -word_size 7 -out blast_misticetos -num_threads 1
 ```
 ### Resultado del Blast:
+Teniendo en cuenta parámetros como el % de identidad (95.548) y el evalue (0.0), posiblemente se trate de la especie *Balaenoptera borealis* y de acuerdo a lo reportado en el NCBI, esta secuencia pertenece al gen COI. 
+
 # Punto 2
 ```
 cat secuenciasC.fasta query.fasta > alinear.fasta```
@@ -51,3 +53,19 @@ Para realizar el **árbol**:
 module load iqtree/1.6.12
 iqtree -s  FcC_supermatrix.fas -m GTR+I+G -bb 1000 -pre misticetosFinal_muscle
 ```
+A continuación, el árbol resultante:
+![ArbolMV](https://github.com/natalyrl/parcial_bioinformatica/blob/main/misticetosFinal_muscle.treefile.png)
+
+### ¿Qué se logra identificar?
+De acuero al modelo utilizado, se logra identificar que el árbol posee un buen soporte para todas sus ramas, ya que todas presentan valores bootstrap mayores o igules a 99, lo que da un buen indicio de cómo podrían estar realmente relacionas las especies trabajas de misticetos. En principio, se logra apreciar que *Balaenoptera edeni* es la única especie que no se encuentra relacionada con ninguna de las otras. Por otro lado, tiene sentido que las dos secuencias de *Caperea marginata* se hayan agrupado, ya que pertenecen a la misma especie; además, se muestra que la especie hermana es *Balaena mysticetus*. Sin embargo, algo interesante de este árbol es la forma en la que se relacionan las especies del género *Balaenoptera*, ya que no representan un grupo monofilético.
+
+# Punto 3
+### Secuencias compuestas de un solo exón
+De acuerdo a este código: ```grep -E -c -v '>\w+ \w*.+,' orf_final_trans.fasta``` hay 57350 secuencias con un solo exón
+
+
+### ¿Por qué las secuencias de proteínas no tienen intrones? 
+Luego del proceso de maduración del ARN, donde se realiza el *splicing* al remover intrones y unir exones, el ARN maduro posee solamente los exones. Por ende, en la síntesis de proteínas, solo se están traduciendo los exones. 
+
+# Punto 4
+ZIP File: [Archivos](https://github.com/natalyrl/parcial_bioinformatica/blob/main/archivos.zip)
